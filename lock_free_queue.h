@@ -11,7 +11,7 @@ namespace FXLIB
 		{
 		public:
 			virtual ~InitNode() {}
-			virtual void operator ()(typename Node& refNode)
+			virtual void operator ()(Node& refNode)
 			{
 			}
 		};
@@ -20,7 +20,7 @@ namespace FXLIB
 		{
 		public:
 			virtual ~ProcessNode() {}
-			virtual void operator ()(typename Node& refNode)
+			virtual void operator ()(Node& refNode)
 			{
 			}
 		};
@@ -64,8 +64,11 @@ namespace FXLIB
 			bool m_bProcessed;
 		};
 
+		long m_qwPrd1[7];
 		LockFreeNode* m_pHead;
+		long m_qwPrd2[7];
 		LockFreeNode* m_pTail;
+		long m_qwPrd3[7];
 	};
 };
 
