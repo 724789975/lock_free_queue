@@ -1,13 +1,16 @@
 #include "lock_free_queue.h"
 
 #include <thread>
+#include <iostream>
 
 FXLIB::LockFreeQueue<int> free_lock_queue;
 int main()
 {
 	std::thread t = std::thread([] {
-		for (int i = 0;; ++i)
+		auto t1 = std::chrono::system_clock::now();
+		for (int i = 0; i < 10000000; ++i)
 		{
+
 			class t : public FXLIB::LockFreeQueue<int>::InitNode
 			{
 			public:
@@ -26,6 +29,12 @@ int main()
 			t _t(i);
 			free_lock_queue.Push(_t);
 		}
+		auto t2 = std::chrono::system_clock::now();
+
+		unsigned long long qwt1 = std::chrono::duration_cast<std::chrono::microseconds>(
+			(t2-t1)).count();
+
+		std::cout << qwt1 << "\n";
 		}
 	);
 
@@ -41,6 +50,7 @@ int main()
 			}
 			void operator ()(int& refNode)
 			{
+				//std::cout << refNode << "\n";
 			}
 		protected:
 		private:
